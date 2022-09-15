@@ -87,7 +87,7 @@ const filtrarProductosXNombre = (nombre) => {
 
     let arrayFiltrado = arrayProductos.filter(x => x.nombre == nombre);
 
-    cargarProductosFiltrados(arrayFiltrado);
+    cargarProductos(arrayFiltrado);
 
 }
 
@@ -113,21 +113,14 @@ const crearCardProducto = (producto) => {
 }
 
 // carga la lista de productos
-const  cargarProductos = () => {
+const  cargarProductos = (Productos) => {
 
     divProductos.innerHTML = ``;
-    for (const item of arrayProductos) {
+    for (const item of Productos) {
         crearCardProducto(item);
     }
 }
 
-const  cargarProductosFiltrados = (arrayFiltrado) => {
-
-    divProductos.innerHTML = ``;
-    for (const item of arrayFiltrado) {
-        crearCardProducto(item);
-    }
-}
 
 // agrega el nombre del usuario al saludo
 const saludo = (nombre) => {
@@ -143,7 +136,7 @@ formProductos.addEventListener('submit', (e) =>{
 
     agregarProducto();
 
-    cargarProductos();
+    cargarProductos(arrayProductos);
 
 });
 
