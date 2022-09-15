@@ -31,14 +31,41 @@
       </div>
     </div>
   </nav>
-  <div id="divSaludo" class="container-fluid mt-2 mt-lg-2">
-    <!-- DIV PARA AGREGAR SALUDO AL USUARIO -->
-  </div>
-  <div class="container-fluid mt-2 mt-lg-2">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Filter Products" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+
+  <div id="divAgregarProducto" class="container-fluid mt-2 mt-lg-2">
+    <!-- DIV PARA AGREGAR SALUDO AL USUARIO y AGREGAR PRODUCTOS -->
+    <h1 id="saludo" class="centrarTexto"></h1>
+    <h2 class="centrarTexto">Add Product to the List:</h2>
+    <form id="formProductos" class="container-fluid m-auto w-50">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">ID</span>
+        <input id="idProducto" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+        <input id="nombreProducto" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+        <input id="precioProducto" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Type</span>
+        <input id="tipoProducto" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+      <input class="btn btn-primary" value="ADD" type="submit">
     </form>
+  </div>
+
+  <div class="container-fluid mt-2 mt-lg-2">
+    <div class="d-flex" role="search">
+      <input id="inputFiltro" class="form-control me-2" type="search" placeholder="Filter Products" aria-label="Search">
+      <button id="btnFiltrar" class="btn btn-primary">Search</button>
+    </div>
   </div>
   <div class="container-fluid">
     <div id="divProductos" class="row justify-content-around mt-2 mb-2">
