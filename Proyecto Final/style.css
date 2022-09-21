@@ -1,8 +1,163 @@
-*{
-    box-sizing: content-box;
+* {
+    margin: 0;
+    padding: 0;
     scroll-behavior: smooth;
+    list-style: none;
 }
 
-.centrarTexto {
+ul {
+    margin-bottom: 0;
+}
+a{
+    text-decoration: none;
+}
+p{ margin-bottom: 0;}
+
+/*NAVBAR */
+.navbarCustom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: aqua;
+
+}
+
+.navbarCustom div {
+    width: fit-content;
+}
+
+.navbarCustom .navIzquierda {
+    display: flex;
+    padding-left: 5%;
+
+}
+
+.navIzquierda ul {
+    display: flex;
+    margin-left: 40px;
+}
+
+.navIzquierda ul li:nth-child(2) {
+    margin-left: 15px;
+}
+
+.navbarCustom .navDerecha {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+
+}
+
+/* SPLIDE*/
+
+.splide__slide {
+    width: 100%;
+}
+
+.overlay {
+    width: 100%;
+    height: 40rem;
+    background-color: black;
+    opacity: 0.5;
+    position: absolute;
+}
+
+.slider-text {
+    color: white;
+    z-index: 1;
+    
+}
+
+/* FILTRO*/
+.filtro-container {
+    position: relative;
+}
+
+.section-filtro {
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 50px 10px rgba(0, 0, 0, 0.25);
+    width: 60%;
+    background-color: #fff;
+    position: absolute;
+    top: -60px;
+    left: 20%;
+    z-index: 1;
+
+}
+
+.section-filtro input {
+    width: 70%;
+    margin-top: 15px;
+
+}
+
+/* div productos*/
+
+.productos-container{
+   margin-top: 140px;
+}
+
+/* card*/
+
+.card{
+    box-shadow: 5px 5px 50px 5px rgba(0, 0, 0, 0.25);
+    border: none;
+    
+}
+
+/* MODAL CARRITO */
+
+.modal-container{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 3;
+    
+}
+.carrito-container{
+   width: 80%;
+   top: 20%;
+   height: auto;
+   left: 10%;
+   background-color: grey;
+   position: fixed;
+   border-radius: 10px;
+}
+.productos-carrito{
+    background-color: #fff;
+    width: 100%;
+    height: 400px;
+    overflow-y:auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.carrito-titulo h2{
+    padding: 20px 0;
     text-align: center;
+}
+.carrito-titulo span{
+    position: absolute;
+    right: 0;
+    padding-right: 8px;
+}
+.total-carrito{
+    text-align: right;
+    margin-right: 20px;
+    padding: 20px 0;
+}
+.carrito-producto{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.carrito-producto img{
+    width: 10%;
 }

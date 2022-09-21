@@ -1,79 +1,43 @@
+import productos from './productos.json' assert {type: 'json'}; 
+
 //ARRAYS 
 
 let arrayCarrito = [];
 
-let arrayProductos = [];
-
-//VARIABLES DOM.
-
-let divProductos = document.getElementById("divProductos");
-
-let tituloSaludo = document.getElementById("saludo");
-
-let formProductos = document.getElementById("formProductos");
-
-let btnFiltrar = document.getElementById("btnFiltrar");
-
-let inputFiltro = document.getElementById("inputFiltro");
+let arrayProductos = productos;
 
 // Objetos
 
-class Producto  {
-    constructor(id,nombre,precio,tipo){
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.tipo = tipo;
-    }
-}
-
 class ItemCarrito {
-    constructor(id,nombre,precio,tipo,cantidad){
+    constructor(id,nombre,precio,tipo,img){
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;
-        this.cantidad - cantidad;
+        this.img = img,
+        this.cantidad = 1;
     }
 }
 
 //Funciones
-const agregarProducto = () => {
+const agregarProducto = (id,nombre,precio,tipo,img) => {
 
-    let id = document.getElementById("idProducto").value;
-    let nombre = document.getElementById("nombreProducto").value;
-    let precio = document.getElementById("precioProducto").value;
-    let tipo = document.getElementById("tipoProducto").value;
+    console.log("ok");
 
-    
-    let producto = new Producto(id,nombre,precio,tipo);
-    console.log(producto)
+    let itemCarrito = new ItemCarrito(id,nombre,precio,tipo,img);
 
-    let validacion = arrayProductos.findIndex(x => x.id == id);
+    console.log(itemCarrito);
+
+    let validacion = arrayCarrito.findIndex(x => x.id == id);
 
     if(validacion != -1){
-        alert("ya existe ese id de producto");
+        arrayCarrito.find(x => x.id == id ).cantidad++;
     }
     else{
-        arrayProductos.push(producto);
+        arrayCarrito.push(itemCarrito);
     }
-}
 
-const eliminarProducto = (id) => {
-
-    let indice = arrayProductos.findIndex(x => x.id == id);
-
-    if(indice != -1){
-
-        arrayProductos.splice(indice,1);
-        console.log(arrayProductos);
-
-    }
-    else{
-
-        alert("No existe ese producto");
-
-    }
+    cargarItemsCarrito();
 }
 
 const filtrarProductosXTipo = (tipo) => {
@@ -85,9 +49,17 @@ const filtrarProductosXTipo = (tipo) => {
 
 const filtrarProductosXNombre = (nombre) => {
 
-    let arrayFiltrado = arrayProductos.filter(x => x.nombre == nombre);
+    let arrayFiltrado = arrayProductos.filter(x => x.nombre.toLowerCase().includes(nombre.toLowerCase()));
 
-    cargarProductos(arrayFiltrado);
+    if(nombre == ""){
+        console.log(arrayFiltrado);
+        
+        cargarProductos(arrayProductos);
+    }
+    else{
+        cargarProductos(arrayFiltrado);
+    }
+    
 
 }
 
@@ -96,107 +68,201 @@ const crearCardProducto = (producto) => {
 
     let nuevaCard =  document.createElement("div");
 
-    nuevaCard.classList.add("card","col-md-3");
+    nuevaCard.classList.add("card","col-md-3","col-lg-2","col-sm-5");
 
-    nuevaCard.innerHTML = `<img src="img/prueba.jpg" class="card-img-top" alt="...">
+    nuevaCard.innerHTML = ` <img src="img/prueba.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h4 class="card-title">${producto.id}</h4>
+                                <h4 id="idProducto" class="card-title">${producto.id}</h4>
                                 <h5 class="card-title">${producto.nombre}</h5>
                                 <p class="card-text">$${producto.precio}</p>
                                 <p class="card-text">Type: ${producto.tipo}</p>
-                                <a id="addProducto" href="" class="btn btn-primary">Add to Cart</a>
-                                <a id="deleteProducto" href="" class="btn btn-primary">Delete Product</a>
+                                <a id="add-producto${producto.id}" class="btn btn-primary add-producto">Add to Cart</a>
                             </div>`;
 
     divProductos.append(nuevaCard);
 
+    //evento para agregar el producto al carrito.
+    let btnAgregarProducto = document.querySelector(`#add-producto${producto.id}`);
+    
+    btnAgregarProducto.addEventListener('click', (e) => {
+                
+            if(carrito.style.visibility === "hidden"){
+
+                carrito.style.visibility = "visible";
+
+                agregarProducto(producto.id,producto.nombre,producto.precio,producto.tipo,producto.img);
+
+            }
+
+    });
+
 }
 
 // carga la lista de productos
-const  cargarProductos = (Productos) => {
+const  cargarProductos = (productos) => {
 
     divProductos.innerHTML = ``;
-    for (const item of Productos) {
+    for (const item of productos) {
         crearCardProducto(item);
+    }
+
+    
+}
+
+// crea un card item para el carrito
+const crearItemCarrito = (producto) => {
+
+    let nuevoItemCarrito =  document.createElement("div");
+
+    nuevoItemCarrito.classList.add("carrito-producto");
+
+    nuevoItemCarrito.innerHTML = ` <img src="img/play4.jpg" alt="">
+                            <h2>${producto.nombre} X ${producto.cantidad}</h2>
+                            <div class="producto-cantidades">
+                            <a id="sumarItem${producto.id}">+</a>
+                            <a id="restarItem${producto.id}">-</a>
+                            </div>
+                            <p>$${producto.precio * producto.cantidad}</p>
+                            <a id="eliminarItem${producto.id}">X</a>`;
+
+    productosCarrito.append(nuevoItemCarrito);
+
+    //eventos del item carrito
+    //sumar 1 item.
+    let btnSumarItem = document.querySelector(`#sumarItem${producto.id}`);
+    
+    btnSumarItem.addEventListener('click', () => {
+     
+        arrayCarrito.find(x => x.id == producto.id ).cantidad++;
+        cargarItemsCarrito();
+    });
+
+    //restar 1 item
+    let btnRestarItem = document.querySelector(`#restarItem${producto.id}`);
+    
+    btnRestarItem.addEventListener('click', () => {
+
+        if(producto.cantidad > 1)
+        {
+            arrayCarrito.find(x => x.id == producto.id ).cantidad--;
+        }
+        else{
+            let eliminar = arrayCarrito.findIndex(x => x.id == producto.id);
+            arrayCarrito.splice(eliminar,1);
+        }
+        cargarItemsCarrito();
+    });
+
+    //Eliminar Item
+    let btnEliminarItem = document.querySelector(`#eliminarItem${producto.id}`);
+
+    btnEliminarItem.addEventListener('click', () => {
+     
+        let eliminar = arrayCarrito.findIndex(x => x.id == producto.id);
+        arrayCarrito.splice(eliminar,1);
+        cargarItemsCarrito();
+    });
+
+}
+// carga lista de el carrito
+const  cargarItemsCarrito = () => {
+
+    productosCarrito.innerHTML = "";
+    for (const item of arrayCarrito) {
+        crearItemCarrito(item);
+    }
+    if(productosCarrito.innerHTML == ""){
+        productosCarrito.innerHTML = "El carrito esta Vacio";
     }
 }
 
-
-// agrega el nombre del usuario al saludo
-const saludo = (nombre) => {
-    tituloSaludo.innerHTML = `Bienvenido a mi Ecommerce ${nombre}!`;
-}
-
 //****************************************
+
+//VARIABLES DOM.
+
+let divProductos = document.getElementById("div-productos");
+
+let filtro = document.getElementById("input-filtro");
+
+let carrito = document.getElementById('modal-container');
+
+let btnCarrito = document.getElementById('btn-carrito');
+
+let cerrarCarrito = document.getElementById('cerrar-carrito');
+
+let productosCarrito = document.querySelector('.productos-carrito');
+;
+
 //EVENTOS
+document.addEventListener( 'DOMContentLoaded', function() {
 
-formProductos.addEventListener('submit', (e) =>{
+    //SLIDER
+    var splide = new Splide( '.splide', {
+        type     : 'loop',
+        height   : '40rem',
+        focus    : 'center',
+        pauseOnHover: false,
+        pagination : false,
+        cover: true,
+        autoplay: true,
+        autoWidth: true,
+    });
+    splide.mount();
+    // *** fin config slider.
 
-    e.preventDefault();
-
-    agregarProducto();
+    // console.log(arrayProductos);
 
     cargarProductos(arrayProductos);
+    carrito.style.visibility = "hidden";
 
-});
+    filtro.addEventListener('keyup', (e) => {
 
-btnFiltrar.addEventListener('click', (e) => {
-
-    let nombre = inputFiltro.value;
-    filtrarProductosXNombre(nombre);
-
-});
-
-
-//APLICACION. 
-let nombreUsuario = prompt("Bienvenido, ingrese su nombre por favor...");
-saludo(nombreUsuario);
-
-
-
-//EVENTO ON LOAD PARA CARGAR ALGO DEL HTML PRIMERO...
-// window.addEventListener('load', (event) => {
-
-    
-//     let cantProductos = parseInt(prompt("Ingrese la cantidad de productos a agregar"));
-
-//     while(isNaN(cantProductos)){
-
-//         cantProductos = parseInt(prompt("Ingrese la cantidad de productos a agregar"));
-//     }
-
-
-//     for (let i = 0; i < cantProductos; i++) {
+        console.log(e.target.value);
+        filtrarProductosXNombre(e.target.value);
         
-//         agregarProducto();
-        
-//     }
+    });
 
-//     cargarProductos();
-    
-//     //TIMEOUT PARA CARGAR EL HTML Y LUEGO MOSTRAR EL PROMPT.
-//     setTimeout(() => {
-//         let eliminar = prompt("desea eliminar algun producto? S/N").toUpperCase();
+    btnCarrito.addEventListener('click', () => {
 
-//         if(eliminar == 'S'){
+        carrito.style.visibility = "visible";
+        cargarItemsCarrito();
 
-//             eliminar = prompt("ingrese el id del producto a eliminar");
+    });
 
-//             eliminarProducto(eliminar);
+    cerrarCarrito.addEventListener('click', () => {
 
-//             cargarProductos();
-//         }
-//     }, 2000);
-    
+        carrito.style.visibility = "hidden";
+
+    });
+
+
+
+
+} );
+
+
+
+  
+// formProductos.addEventListener('submit', (e) =>{
+
+//     e.preventDefault();
+
+//     agregarProducto();
+
+//     cargarProductos(arrayProductos);
+
+// });
+
+// btnFiltrar.addEventListener('click', (e) => {
+
+//     let nombre = inputFiltro.value;
+//     filtrarProductosXNombre(nombre);
+
 // });
 
 
+//APLICACION. 
 
 
-// Muestro los porductos por consola con un forOf...
-// for (const item of arrayProductos) {
-    
-//     console.log(`id:${item.id} nombre: ${item.nombre}, precio: ${item.precio}, tipo: ${item.tipo}`);
 
-// }
 
