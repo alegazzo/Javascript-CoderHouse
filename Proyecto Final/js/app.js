@@ -183,6 +183,7 @@ const  cargarItemsCarrito = () => {
     
 }
 
+// calcula el monto total del carrito y lo agrega al dom.
 const totalCarrito = () => {
 
     let montoTotal= document.querySelector(".total-carrito")
@@ -259,11 +260,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
     });
 
-    //obtiene datos de localstorage.
-    arrayCarrito =JSON.parse(localStorage.getItem("productosCarrito"));
-    if(arrayCarrito == null){
-        arrayCarrito = [];
-    }
+    //obtiene datos de localstorage. si es null instancia el array vacio. operador ternario.
+    arrayCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+   
 
 } );
 
