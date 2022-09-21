@@ -1,6 +1,6 @@
 import productos from './productos.json' assert {type: 'json'}; 
 
-//ARRAYS 
+//ARRAYS GLOBALES
 
 let arrayCarrito = [];
 
@@ -112,6 +112,7 @@ const  cargarProductos = (productos) => {
 // crea un card item para el carrito
 const crearItemCarrito = (producto) => {
 
+    //AGREGA CARD ITEM CARRITO
     let nuevoItemCarrito =  document.createElement("div");
 
     nuevoItemCarrito.classList.add("carrito-producto");
@@ -119,11 +120,11 @@ const crearItemCarrito = (producto) => {
     nuevoItemCarrito.innerHTML = ` <img src="img/play4.jpg" alt="">
                             <h2>${producto.nombre} X ${producto.cantidad}</h2>
                             <div class="producto-cantidades">
-                            <a id="sumarItem${producto.id}">+</a>
-                            <a id="restarItem${producto.id}">-</a>
+                            <a id="sumarItem${producto.id}" class="btn btn-success">+</a>
+                            <a id="restarItem${producto.id}" class="btn btn-danger">-</a>
                             </div>
                             <p>$${producto.precio * producto.cantidad}</p>
-                            <a id="eliminarItem${producto.id}">X</a>`;
+                            <a id="eliminarItem${producto.id}" class="btn btn-danger">X</a>`;
 
     productosCarrito.append(nuevoItemCarrito);
 
@@ -164,7 +165,8 @@ const crearItemCarrito = (producto) => {
     });
 
 }
-// carga lista de el carrito
+
+// carga lista de el carrito, guarda en local storage.
 const  cargarItemsCarrito = () => {
 
     productosCarrito.innerHTML = "";
@@ -174,6 +176,24 @@ const  cargarItemsCarrito = () => {
     if(productosCarrito.innerHTML == ""){
         productosCarrito.innerHTML = "El carrito esta Vacio";
     }
+
+    totalCarrito();
+    
+    localStorage.setItem("productosCarrito", JSON.stringify(arrayCarrito));
+    
+}
+
+const totalCarrito = () => {
+
+    let montoTotal= document.querySelector(".total-carrito")
+    let total = 0;
+
+    for (let item of arrayCarrito){ 
+        total += item.precio * item.cantidad;
+    }
+
+    montoTotal.innerHTML =`TOTAL: $${total}`;
+    console.log(total)
 }
 
 //****************************************
@@ -191,9 +211,13 @@ let btnCarrito = document.getElementById('btn-carrito');
 let cerrarCarrito = document.getElementById('cerrar-carrito');
 
 let productosCarrito = document.querySelector('.productos-carrito');
-;
+
+
 
 //EVENTOS
+
+//APLICACION. 
+
 document.addEventListener( 'DOMContentLoaded', function() {
 
     //SLIDER
@@ -235,33 +259,17 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
     });
 
-
-
+    //obtiene datos de localstorage.
+    arrayCarrito =JSON.parse(localStorage.getItem("productosCarrito"));
+    if(arrayCarrito == null){
+        arrayCarrito = [];
+    }
 
 } );
 
 
 
-  
-// formProductos.addEventListener('submit', (e) =>{
 
-//     e.preventDefault();
-
-//     agregarProducto();
-
-//     cargarProductos(arrayProductos);
-
-// });
-
-// btnFiltrar.addEventListener('click', (e) => {
-
-//     let nombre = inputFiltro.value;
-//     filtrarProductosXNombre(nombre);
-
-// });
-
-
-//APLICACION. 
 
 
 

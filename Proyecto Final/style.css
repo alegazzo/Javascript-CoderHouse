@@ -21,7 +21,9 @@ p{ margin-bottom: 0;}
     align-items: center;
     height: 100px;
     background-color: aqua;
-
+    position: fixed;
+    top: 0;
+    z-index: 5;
 }
 
 .navbarCustom div {
@@ -52,6 +54,9 @@ p{ margin-bottom: 0;}
 
 /* SPLIDE*/
 
+.splide {
+    margin-top: 100px;
+}
 .splide__slide {
     width: 100%;
 }
