@@ -91,7 +91,7 @@
     <div class="carrito-container">
       <!-- CONTENIDO DEL CARRITO -->
       <div class="carrito-titulo">
-        <span id="cerrar-carrito">X</span>
+        <span id="cerrar-carrito" class="btn btn-danger">X</span>
         <h2>Titulo</h2>
       </div>
       <div class="productos-carrito">
@@ -99,11 +99,16 @@
         
       </div>
       <!-- TOTAL CARRITO -->
-      <p class="total-carrito"></p>
+      <div class="carrito-abajo">
+        <a class="btn btn-success btn-comprar-carrito">Buy All</a>
+        <p class="total-carrito"></p>
+      </div>
+      
     </div>
   </div>
   <!-- SCRIPT DEL SLIDER -->
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/js/splide.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
 

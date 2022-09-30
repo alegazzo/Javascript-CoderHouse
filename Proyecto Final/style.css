@@ -11,6 +11,9 @@ ul {
 a{
     text-decoration: none;
 }
+a:hover{
+    cursor: pointer;
+}
 p{ margin-bottom: 0;}
 
 /*NAVBAR */
@@ -165,4 +168,18 @@ p{ margin-bottom: 0;}
 }
 .carrito-producto img{
     width: 10%;
+}
+#cerrar-carrito:hover{
+    cursor: pointer;
+}
+#cerrar-carrito{
+    text-align: center;
+}
+.carrito-abajo{
+    display: flex;
+    justify-content: space-between;
+}
+.btn-comprar-carrito{
+    margin: auto 0 auto 50px;
+
 }
