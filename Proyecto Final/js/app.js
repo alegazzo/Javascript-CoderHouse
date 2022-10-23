@@ -1,9 +1,26 @@
-import productos from './productos.json' assert {type: 'json'}; 
+// import productos from './productos.json' assert {type: 'json'}; 
+
+// API DE VIDEOJUEGOS. NO ME SIRVE LA INFO PARA ESTA OCASION
+// const traerDatosProductos = async () => {
+
+//     const respuesta = await fetch("https://api.rawg.io/api/platforms?key=0d99bde3d9e64d8fa6fef52acd898cbb");
+//     const data = await respuesta.json()
+//     console.log(data);
+//     return data;
+// }
 //ARRAYS GLOBALES
 
 let arrayCarrito = [];
 
-let arrayProductos = productos;
+// carga la lista de productos.
+const traerDatosProductos = async () => {
+
+    let respuesta = await fetch("js/productos.json");
+    let data = await respuesta.json();
+    data.forEach(item => {
+        crearCardProducto(item);
+    });
+}
 
 // Objetos
 
@@ -64,7 +81,6 @@ const filtrarProductosXNombre = (nombre) => {
 
 // crea una card de producto
 const crearCardProducto = (producto) => {
-
     let nuevaCard =  document.createElement("div");
 
     nuevaCard.classList.add("card","col-md-3","col-lg-2","col-sm-5");
@@ -91,15 +107,18 @@ const crearCardProducto = (producto) => {
 }
 
 // carga la lista de productos
-const  cargarProductos = (productos) => {
+// const  cargarProductos = (productos) => {
 
-    divProductos.innerHTML = ``;
-    for (const item of productos) {
-        crearCardProducto(item);
-    }
-
+//     console.log(productos)
     
-}
+//     divProductos.innerHTML = ``;
+   
+//     for (const item of productos) {
+//         console.log(1)
+//         crearCardProducto(item);
+//     }
+
+// }
 
 // crea un card item para el carrito
 const crearItemCarrito = (producto) => {
@@ -244,6 +263,7 @@ let productosCarrito = document.querySelector('.productos-carrito');
 
 document.addEventListener( 'DOMContentLoaded', function() {
 
+    
     //SLIDER
     var splide = new Splide( '.splide', {
         type     : 'loop',
@@ -259,8 +279,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
     // *** fin config slider.
 
     // console.log(arrayProductos);
+    traerDatosProductos();
 
-    cargarProductos(arrayProductos);
     carrito.style.visibility = "hidden";
 
     filtro.addEventListener('keyup', (e) => {

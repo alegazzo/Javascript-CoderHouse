@@ -1,67 +1,58 @@
 [
-    {
-        "id":1,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-    
-    },
-    {
-        "id":2,
-        "nombre": "XBOX 360",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-
-        
-    },
-    {
-        "id":3,
-        "nombre": "Wii",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    },
-    {
-        "id":4,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    },
-    {
-        "id":5,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    },
-    {
-        "id":6,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    },
-    {
-        "id":7,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    },
-    {
-        "id":8,
-        "nombre": "Playstation 5",
-        "precio": 100,
-        "tipo": "consola",
-        "img": ""
-        
-    }
+  {
+    "id": 1,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 2,
+    "nombre": "XBOX 360",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 3,
+    "nombre": "Wii",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 4,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 5,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 6,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 7,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  },
+  {
+    "id": 8,
+    "nombre": "Playstation 5",
+    "precio": 100,
+    "tipo": "consola",
+    "img": ""
+  }
 ]
